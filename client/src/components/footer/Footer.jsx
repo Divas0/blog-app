@@ -4,7 +4,7 @@ const  Footer = () => {
 
   
   return (
-    <div className='h-[150px] w-full bg-black sticky mt-auto'>Footer</div>
+    <div className='relative  bottom-0 mt-auto'>Footer</div>
   )
 }
 

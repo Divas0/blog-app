@@ -16,25 +16,14 @@ export class AuthServices{
     }
 
 
-    async  createAccount ({email, userName, password}){
-
-        // const userAccount =await this.account.create( ID.unique(), email,userName, password );
-        // userAccount.then(({email, password})=> this.login({email, password}) ).catch((err)=> err.message);
-
-        try{
-            const promise = await this.account.create(ID.unique(), email,userName, password );
-            
-            if (promise){
-                return   this.login({email, password});
-
-            } else {
-                return userAccount;
-            }
-
-        } catch (error){
-             throw ("error", error.message );
-        }
-    };
+    async createAccount({email, password, userName}){
+        try {
+            const userAccount = await this.account.create(ID.unique(), email, password, userName)
+            if(userAccount) return this.login({email, password})
+            else return userAccount
+        } catch (error) {
+            throw error
+        }}
 
     async login ({email, password}){
       try {
@@ -47,7 +36,7 @@ export class AuthServices{
 
     async getCurrentuser(){
         try {
-            return  await  this.account.get()
+            return  await  this.account.get();
             
         } catch (error) {
             throw error
