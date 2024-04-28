@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import authService from '../../appwrite/auth'
-import toast from "react-toastify"
+import {toast} from "react-toastify"
 
 function PostForm({ post }) {
     const [loading, setLoading] = useState(false)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import authService from "../appwrite/auth";
 import { login as authlogin } from "../store/authSlice";
@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 
 function Login() {
     const dispatch=useDispatch();
     const navigate=useNavigate()
+    const [loading, setLoading]=useState(false)
   const {
     register,
     handleSubmit,
@@ -18,49 +20,56 @@ function Login() {
   } = useForm();
 
   const onSubmit =  async ({email, password}) => {
+    setLoading(true)
      try {
         const session= await authService.login({email, password});
      if (session){
-        const userData=authService.getCurrentuser();
+        const userData= await authService.getCurrentuser();
         console.log(userData)
         if (userData){
          dispatch(authlogin(userData));
-         navigate("/all-posts")
+         navigate("/")
          toast.success("succesfully logged in ", {
           position:"top-right"
          })
+         setLoading(false)
         }
     }
      } catch (error) {
          throw error;
      }
   };
+  if (loading==true){
+    return <> <Loader/></>
+  }
 
   return (
-    <div className="border flex flex-col border-black w-full  h-screen justify-center items-center absolute gap-[10px] ">
-      <div className="w-[400px] flex flex-col gap-[15px] ">
+    <div className=" flex flex-col  w-full  mt-[60px]  h-screen  items-center    ">
+      <div className="w-[400px] flex flex-col gap-[15px]  ">
+        <p className="font-bold text-xl ml-[120px] "> Login</p>
+        
       <Input
         {...register("email")}
-        className="py-[10px] px-[7px] border  rounded-md"
+        className="py-[9px] px-[7px]  rounded-md "
         type="email"
-        placeholder="email.."
+        placeholder=" eg:email@email.com"
       />
-      {errors.email && (
-        <p className="text-red-500"> {`${errors.email.message}`}</p>
+     {errors.email && (
+        <p className="text-red-500 "> {`${errors.email.message}`}</p>
       )}
 
       <Input
         {...register("password")}
-        className="py-[10px] px-[7px] border"
+        className="py-[9px] px-[7px] border   "
         type="password"
-        placeholder="password.."
+        placeholder=" eg:password"
       />
       {errors.password && (
         <p className="text-red-500"> {`${errors.password.message}`}</p>
       )}
       <button
         onClick={handleSubmit(onSubmit)}
-        className="py-[10px] px-[7px] border-black rounded-lg text-white bg-blue-600  "
+        className="py-[9px] px-[6px] w-[300px] border-black rounded-lg text-white  bg-blue-600  "
         disabled={isSubmitting}
       >
         submit

@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom'
 const Landing = () => {
   return ( <>
     <Header/>
+    
     <Outlet/>
     
     <Footer/>

@@ -10,7 +10,11 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
 
+   
+  
+
     const userData = useSelector((state) => state.auth.userData);
+ 
     console.log(userData)
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
@@ -35,8 +39,9 @@ export default function Post() {
 
     return post ? (
         <div className="py-8">
-            <div className="w-[400px] ">
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+            <div className="w-full  ">
+                
+                <div className="w-full h-[300px] flex justify-center mb-4  px-[40px] relative  rounded-xl ">
                     <img
                         src={services.getFilePreview(post.featuredImage)}
                         alt={post.title}
@@ -56,11 +61,13 @@ export default function Post() {
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                <div className="w-full flex flex-col justify-center items-center ">
+                <div className="w-full mb-6 px-[40px] ">
+                    <h1 className="text-2xl  text-center font-bold">{post.title}</h1>
                 </div>
-                <div className="browser-css">
+                <div className="browser-css px-[150px]">
                     {parse(post.content)}
+                    </div>
                     </div>
             </div>
         </div>

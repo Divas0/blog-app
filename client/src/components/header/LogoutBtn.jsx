@@ -10,13 +10,13 @@ const LogoutBtn = () => {
     const handleLogout=()=>{
          authService.logout().then(()=> {
             dispatch(authlogout());
-            navigate("/home")
+            navigate("/" , {replace:true})
          })
     }
 
   return (
     <>
-    <button onClick={handleLogout} className=' py-[8px] px-[16px] bg-white  font-bold text-black   shadow-md  rounded-md '> logout</button></>
+    <button onClick={handleLogout} className=' py-[8px] px-[16px] bg-red-700  font-bold text-white    shadow-md  rounded-md '> logout</button></>
   )
 }
 
