@@ -15,7 +15,6 @@ Tailwind CSS (Styling): A utility-first CSS framework for constructing efficient
 Appwrite (Backend): An end-to-end backend server that simplifies backend tasks, ensuring secure user authentication and data storage.
 
 
-
 Running the project
 Clone the Repository:
 Navigate to the Project Directory: cd client
